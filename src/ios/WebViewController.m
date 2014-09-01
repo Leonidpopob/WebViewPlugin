@@ -60,11 +60,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+
     if ([self respondsToSelector:@selector(edgesForExtendedLayout)]){
         self.edgesForExtendedLayout = UIRectEdgeNone;
     }
-    
+
     hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     // Do any additional setup after loading the view from its nib.
     UINavigationBar *naviBarObj ;
@@ -73,9 +73,10 @@
      }else{
      naviBarObj = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
      }
-    UIImage *navBarImg = [UIImage imageNamed:@"navig.png"];
-    
-    [naviBarObj setBackgroundImage:navBarImg forBarMetrics:UIBarMetricsDefault];
+//    UIImage *navBarImg = [UIImage imageNamed:@"navig.png"];
+//
+//    [naviBarObj setBackgroundImage:navBarImg forBarMetrics:UIBarMetricsDefault];
+    [naviBarObj setBackgroundColor:[UIColor blackColor]];
     [naviBarObj setTintColor:[UIColor whiteColor]];
     [self.view addSubview:naviBarObj];
     UIBarButtonItem *cancelItem = [[UIBarButtonItem alloc] initWithTitle:self.cancelLabel       style:UIBarButtonItemStyleBordered target:self action:@selector(cancelButtonPressed)];
@@ -83,10 +84,10 @@
     naviBarObj.items = [NSArray arrayWithObjects: navigItem,nil];
     navigItem.leftBarButtonItem = cancelItem;
    [ webView sizeThatFits:  CGSizeMake(self.view.bounds.size.width, self.view.bounds.size.height-150)];
-    
+
     NSLog(@"0,44, w >>%f,height>> %f",self.view.bounds.size.width, self.view.bounds.size.height);
-     
-    
+
+
     webView.opaque = YES;
     webView.scalesPageToFit = YES;
     webView.scrollView.zoomScale =4.0;
@@ -106,17 +107,17 @@
 //	back.enabled = NO;
 //	forward.enabled = NO;
     [hud show:YES];
-    
+
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)thisWebView
 {
     [ hud hide:YES];
-    
+
 }
 
 -(void)webView:(UIWebView *)myWebView didFailLoadWithError:(NSError *)error {
-    
+
    // NSLog(@"No internet connection");
   //  _connectionError.hidden = NO;
     [ hud hide:YES];
@@ -133,26 +134,26 @@
     // Dispose of any resources that can be recreated.
 }
 - (void)viewWillAppear:(BOOL)animated {
-	
+
     //self.lang = [[NSUserDefaults standardUserDefaults] stringForKey:@"currentLanguage"];
-    
+
     UILabel *pubLabel = (UILabel *)[self.view viewWithTag:1005];
     if([self.textorientation isEqualToString:@"RL"]){
         [pubLabel setTextAlignment:UITextAlignmentRight];
-        
+
     } else{
         [pubLabel setTextAlignment:UITextAlignmentLeft];
     }
     pubLabel.text=self.publabel;
-    
-    
+
+
     if(    [self.pubshow isEqualToString : @"true"]) {
         [self.view bringSubviewToFront:awView];
         [self.view bringSubviewToFront:adTopView];
         CGRect newFrame = awView.frame;
         newFrame.origin.x = 0;
         //newFrame.origin.y = self.tableView.contentOffset.y+(self.tableView.frame.size.height-kAdWhirlViewHeight);
-        
+
         if (isAdViewShown) {
             //newFrame.origin.y = self.tableView.contentOffset.y+319;
             newFrame.origin.y = 460;
@@ -160,14 +161,14 @@
             //newFrame.origin.y = self.tableView.contentOffset.y+369;
             newFrame.origin.y = 500;
         }
-        
-        
+
+
         //awView.frame = newFrame;
         adTopView.frame = CGRectMake(0, awView.frame.origin.y-30, 320, 30);
         //DBF
-        
-        
-        
+
+
+
         BOOL mustShowAds=YES;
                  if ((!isAdViewShown && isTopViewAdded && mustShowAds)  ) {
             // [tabview setFrame:CGRectMake(15, 60, 270, 150)];
@@ -182,14 +183,14 @@
             [UIView commitAnimations];
             isAdViewShown=YES;
             //[self performSelector:@selector(hideAdView) withObject:nil afterDelay:5.0];
-            
+
         }
-        
-        
+
+
     }
-    
+
 	[super viewWillAppear:animated];
-	
+
     if(urlString!=nil) {
         NSURLRequest *theRequest = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:urlString]];
         [webView loadRequest:theRequest];
@@ -211,24 +212,24 @@
     if (!isTopViewAdded) {
         adTopView=[[UIView alloc] initWithFrame:CGRectMake(0, 370, 320, 30)];
         adTopView.backgroundColor=[UIColor blackColor];
-        
+
         UILabel *pubLabel=[[UILabel alloc] initWithFrame:CGRectMake(10, 0, 310, 30)];
         pubLabel.tag = 1005;
         if([self.textorientation isEqualToString:@"RL"]){
             [pubLabel setTextAlignment:UITextAlignmentRight];
-            
+
         } else{
             [pubLabel setTextAlignment:UITextAlignmentLeft];
         }
-        
-        
-        
+
+
+
         pubLabel.text=self.publabel;
         pubLabel.textColor=[UIColor redColor];
         pubLabel.backgroundColor=[UIColor clearColor];
         [adTopView bringSubviewToFront:pubLabel];
         [adTopView addSubview:pubLabel];
-        
+
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideAdView)];
         [adTopView addGestureRecognizer:tap];
         isAdViewShown=YES;
@@ -236,7 +237,7 @@
         [self.view addSubview:adTopView];
         [self.view bringSubviewToFront:adTopView];
         [self.view bringSubviewToFront:awView];
-        
+
         CGRect newFrame = awView.frame;
         newFrame.origin.x = 0;
         //newFrame.origin.y = self.tableView.contentOffset.y+(self.tableView.frame.size.height-kAdWhirlViewHeight);
@@ -246,8 +247,8 @@
                     newFrame.origin.y = 415+20;
              }else{
                  newFrame.origin.y = 415;
-             
-                
+
+
              }
         }else{
             //newFrame.origin.y = self.tableView.contentOffset.y+369;
@@ -255,24 +256,24 @@
                 newFrame.origin.y = 460+20;
             }else{
                 newFrame.origin.y = 460;
-                
+
             }        }
-        
+
         if(IS_WIDESCREEN){
             newFrame.origin.y += marginpub;
         }
         awView.frame = newFrame;
         adTopView.frame = CGRectMake(0, awView.frame.origin.y-30, 320, 30);
-        
+
         //[self.view bringSubviewToFront:awView];[self.view bringSubviewToFront:adTopView];
-        
+
     }
-    
+
 }
 
 -(void)hideAdView{
     ////NSLog(@"hideAdView");
-    
+
     if (!isAdViewShown) {
         //   [self.view bringSubviewToFront:toolbar];
         // [tabview setFrame:CGRectMake(15, 60, 270, 150)];
@@ -287,32 +288,32 @@
         isAdViewShown=YES;
         //[self performSelector:@selector(hideAdView) withObject:nil afterDelay:5.0];
         [self.view bringSubviewToFront:awView];[self.view bringSubviewToFront:adTopView];
-        
-        
+
+
     }
     else{
         //[tabview setFrame:CGRectMake(15, 60, 270, 200)];
-        
+
         // [self.view sendSubviewToBack:awView];
-        
+
         [UIView beginAnimations:nil context:nil];
         [UIView setAnimationDuration:0.3];
         [UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
         //adTopView.center=CGPointMake(160,self.tableView.contentOffset.y+ 396);
         //awView.center=CGPointMake(160,self.tableView.contentOffset.y+ 436);
-        
+
         awView.center=CGPointMake(160, awView.center.y+49);
         adTopView.center=CGPointMake(160, adTopView.center.y+49);
         [UIView commitAnimations];
         isAdViewShown=NO;
-        
-        
+
+
     }
-    
-    
-    
-    
-    
+
+
+
+
+
 }
 
 -(void)adView:(GADBannerView *)view didFailToReceiveAdWithError:(GADRequestError *)error{
@@ -321,32 +322,32 @@
 
 
 -(void)adMobProcess{
-    
+
     NSLog(@"  { self.navigationController.view.frame.size.height-GAD_SIZE_320x50.height  } %f - %f",self.view.frame.size.height,GAD_SIZE_320x50.height);
-    
+
     awView = [[GADBannerView alloc]initWithFrame:CGRectMake(0.0,
                                                             self.view.frame.size.height-GAD_SIZE_320x50.height,
                                                             GAD_SIZE_320x50.width,
                                                             GAD_SIZE_320x50.height)];
     self.awView.adUnitID =self.adpublisher;
     [self.awView setDelegate:self];
-    
+
     [self.awView setRootViewController: self];
     // [self.view addSubview:awView];
     //  [self.view sendSubviewToBack:self.tableView];
     //[self.view bringSubviewToFront:awView];[self.view bringSubviewToFront:adTopView];
-    
+
     GADRequest *request = [GADRequest request];
-    
+
     // Make the request for a test ad. Put in an identifier for
     // the simulator as well as any devices you want to receive test ads.
     request.testDevices = [NSArray arrayWithObjects:@"9f89c84a559f573636a47ff8daed0d33", nil];
     //[bannerView_ loadRequest:request];
     request.testing = YES;
     [awView loadRequest: request ];
-    
+
     //[awView loadRequest:[GADRequest request]];
-    
+
 }
 
 -(void)awakeFromNib{
