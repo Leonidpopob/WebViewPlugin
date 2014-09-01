@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        id="com.leonid.phonegap.WebViewPlugin"
+        version="1.0.0">
+
+    <name>WebViewPlugin</name>
+
+    <description>
+        This plugin is used for Tunisie Ligue1 application
+    </description>
+
+    <author>Leonid Popob</author>
+
+    <license>MIT</license>
+
+    <keywords>WebView</keywords>
+
+    <repo>https://github.com/Leonidpopob/WebViewPlugin.git</repo>
+
+    <issue>https://github.com/Leonidpopob/WebViewPlugin.git</issue>
+
+    <engines>
+        <engine name="cordova" version=">=3.0.0"/>
+    </engines>
+
+    <js-module src="www/SocialSharing.js" name="SocialSharing">
+        <clobbers target="window.plugins.socialsharing" />
+    </js-module>
+
+    <!-- ios -->
+    <platform name="ios">
+
+        <config-file target="config.xml" parent="/*">
+            <feature name="WEBVIEW">
+                <param name="ios-package" value="WebViewPlugin"/>
+            </feature>
+        </config-file>
+
+        <header-file src="src/ios/WebViewPlugin.h"/>
+        <source-file src="src/ios/WebViewPlugin.m"/>
+        <header-file src="src/ios/WebViewController.h"/>
+        <source-file src="src/ios/WebViewController.m"/>
+        <header-file src="src/ios/MBProgressHUD.h"/>
+        <source-file src="src/ios/MBProgressHUD.m"/>
+        <resource-file src="src/ios/WebViewController.xib" />
+    </platform>
+
+</plugin>
