@@ -24,8 +24,8 @@
         <engine name="cordova" version=">=3.0.0"/>
     </engines>
 
-    <js-module src="www/SocialSharing.js" name="SocialSharing">
-        <clobbers target="window.plugins.socialsharing" />
+    <js-module src="www/webview_plugin.js" name="WEBVIEW">
+        <clobbers target="WEBVIEW" />
     </js-module>
 
     <!-- ios -->
