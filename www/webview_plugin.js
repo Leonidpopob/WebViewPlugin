@@ -3,7 +3,7 @@
  */
 CDV = ( typeof CDV == 'undefined' ? {} : CDV );
 var cordova = window.cordova || window.Cordova;
-WEBVIEW = {
+var WEBVIEW = {
     show: function(url,lang,adpublisher,pubshow,orient,label,retour) {
         cordova.exec(function(winParam) {console.log(winParam);},
             function(error) {console.log(error);},
@@ -12,3 +12,4 @@ WEBVIEW = {
             [url,lang,adpublisher,pubshow,orient,label,retour]);
     }
 };
+module.exports = WEBVIEW;
